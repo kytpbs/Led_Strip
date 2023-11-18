@@ -1,0 +1,8 @@
+# Folders
+/build
+/.vscode
+
+# Files
+arduino_secrets.h
+
+
