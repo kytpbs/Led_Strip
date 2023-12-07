@@ -12,21 +12,21 @@ const char DEVICE_KEY[]  = SECRET_DEVICE_KEY;    // Secret device password
 void onColorChange();
 void onModeChange();
 void onNightModeChange();
-void onFullySaturateChange();
+void onCloudSerialChange();
 
 CloudColoredLight color;
 int mode;
 CloudSchedule nightMode;
-bool fully_saturate;
+String cloudSerial;
 
 void initProperties(){
 
   ArduinoCloud.setBoardId(DEVICE_LOGIN_NAME);
   ArduinoCloud.setSecretDeviceKey(DEVICE_KEY);
+  ArduinoCloud.addProperty(cloudSerial, READWRITE, ON_CHANGE, onCloudSerialChange);
   ArduinoCloud.addProperty(color, READWRITE, ON_CHANGE, onColorChange);
   ArduinoCloud.addProperty(mode, READWRITE, ON_CHANGE, onModeChange);
   ArduinoCloud.addProperty(nightMode, READWRITE, ON_CHANGE, onNightModeChange);
-  ArduinoCloud.addProperty(fully_saturate, READWRITE, ON_CHANGE, onFullySaturateChange);
 
 }
 
