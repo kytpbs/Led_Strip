@@ -1,0 +1,48 @@
+on:
+    push:
+      branches:
+        - main
+    pull_request:
+      branches:
+        - main
+    release: {}
+
+jobs:
+    esp8266Compile:
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v3     
+
+      - name: Compile ESP8266
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn:  "esp8266:esp8266:nodemcuv2"
+          platforms: |
+            - source-url: "https://arduino.esp8266.com/stable/package_esp8266com_index.json"
+              name: "esp8266:esp8266"
+          sketch-paths: |
+            - ./
+          libraries: |
+           - name: "ArduinoIoTCloud"
+  
+  
+    esp32Compile:
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+  
+        - name: Compile ESP32
+          uses: arduino/compile-sketches@v1
+          with:
+            fqbn:  "esp32:esp32:esp32"
+            platforms: |
+              - source-url: "https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json"
+                name: "esp32:esp32"
+            sketch-paths: |
+              - ./
+            libraries: |
+              - name: "ArduinoIoTCloud"
